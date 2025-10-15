@@ -15,10 +15,14 @@ function createGrid(pixelsPerSide) {
         pixel.classList.add("pixel");
         pixel.style.width = `${pixelSize}px`;
         pixel.style.height = `${pixelSize}px`;
+        pixel.style.opacity = 0;
         container.appendChild(pixel);
 
         pixel.addEventListener("mouseenter", () => {
-            pixel.classList.toggle("pixel-hover");
+            const randomColor = getRandomColor();
+            pixel.style.backgroundColor = randomColor;
+            let currentOpacity = parseFloat(pixel.style.opacity);
+            pixel.style.opacity = Math.min(currentOpacity + 0.1, 1);
         });
     }
 }
@@ -31,6 +35,13 @@ function changeGrid () {
         return;
     }
     createGrid(newSize);
+}
+
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 createGrid(gridSize);

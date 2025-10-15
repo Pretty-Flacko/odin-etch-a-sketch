@@ -13,6 +13,3 @@ button {
     box-sizing: border-box;
     border: 1px grey dotted;
 }
-.pixel-hover {
-    background-color: grey;
-}
