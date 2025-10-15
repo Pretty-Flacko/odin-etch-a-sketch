@@ -1,19 +1,26 @@
 const container = document.querySelector("div");
 const button = document.querySelector("button");
 const containerWidth = 640;
-let pixelsPerSide = 16;
-let pixelSize = containerWidth / pixelsPerSide;
+let gridSize = 16;
 
-for (let i = 0; i < pixelsPerSide ** 2; i++) {
-    const pixel = document.createElement("div");
-    pixel.classList.add("pixel");
-    pixel.style.width = `${pixelSize}px`;
-    pixel.style.height = `${pixelSize}px`;
-    container.appendChild(pixel);
-
-    pixel.addEventListener("mouseenter", () => {
-        pixel.classList.toggle("pixel-hover");
+function createGrid(pixelsPerSide) {
+    const pixelsToRemove= document.querySelectorAll(".pixel");
+    pixelsToRemove.forEach(element => {
+    element.remove();
     });
+    const pixelSize = containerWidth / pixelsPerSide;
+
+    for (let i = 0; i < pixelsPerSide ** 2; i++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixel");
+        pixel.style.width = `${pixelSize}px`;
+        pixel.style.height = `${pixelSize}px`;
+        container.appendChild(pixel);
+
+        pixel.addEventListener("mouseenter", () => {
+            pixel.classList.toggle("pixel-hover");
+        });
+    }
 }
 
 function changeGrid () {
@@ -23,24 +30,8 @@ function changeGrid () {
         alert("Please enter a valid number between 1 and 100.");
         return;
     }
-    pixelsPerSide = newSize;
-
-    const pixelsToRemove= document.querySelectorAll(".pixel");
-    pixelsToRemove.forEach(element => {
-        element.remove();
-    });
-    
-    pixelSize = containerWidth / pixelsPerSide;
-    for (let i = 0; i < pixelsPerSide ** 2; i++) {
-        const pixel = document.createElement("div");
-        pixel.classList.add("pixel");
-        pixel.style.width = `${pixelSize}px`;
-        pixel.style.height = `${pixelSize}px`;
-        container.appendChild(pixel);
-
-        pixel.addEventListener("mouseenter", () => {
-        pixel.classList.toggle("pixel-hover");
-        });
-    }
+    createGrid(newSize);
 }
+
+createGrid(gridSize);
 button.onclick = changeGrid;
