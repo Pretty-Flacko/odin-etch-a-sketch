@@ -1,0 +1,20 @@
+button {
+    display: block;
+    margin: 20px auto;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 640px;
+    border: 2px black solid;
+    margin: auto;
+}
+.pixel {
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    border: 1px grey dotted;
+}
+.pixel-hover {
+    background-color: grey;
+}
