@@ -3,6 +3,7 @@ const button = document.querySelector("button");
 const containerWidth = 640;
 let pixelsPerSide = 16;
 let pixelSize = containerWidth / pixelsPerSide;
+
 for (let i = 0; i < pixelsPerSide ** 2; i++) {
     const pixel = document.createElement("div");
     pixel.classList.add("pixel");
@@ -14,12 +15,21 @@ for (let i = 0; i < pixelsPerSide ** 2; i++) {
         pixel.classList.toggle("pixel-hover");
     });
 }
+
 function changeGrid () {
-    pixelsPerSide = prompt("Enter the number of squares per side (100 max):", "16");
+    let input = prompt("Enter the number of squares per side (1 - 100):", "16");
+    let newSize = parseInt(input);
+    if (isNaN(newSize) || newSize < 1 || newSize > 100) {
+        alert("Please enter a valid number between 1 and 100.");
+        return;
+    }
+    pixelsPerSide = newSize;
+
     const pixelsToRemove= document.querySelectorAll(".pixel");
     pixelsToRemove.forEach(element => {
         element.remove();
     });
+    
     pixelSize = containerWidth / pixelsPerSide;
     for (let i = 0; i < pixelsPerSide ** 2; i++) {
         const pixel = document.createElement("div");
